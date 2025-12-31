@@ -140,7 +140,6 @@ namespace AutoConnect_RT
 
             Process tuner = ps[0];
 
-            // รอ window handle พร้อมจริง ๆ
             for (int i = 0; i < 20 && tuner.MainWindowHandle == IntPtr.Zero; i++)
             {
                 Thread.Sleep(100);
@@ -154,17 +153,15 @@ namespace AutoConnect_RT
                 return;
             }
 
-            // Restore + Foreground (ต้องมีจังหวะ)
+
             ShowWindow(hwnd, SW_RESTORE);
             Thread.Sleep(200);
             SetForegroundWindow(hwnd);
-            Thread.Sleep(400);   // 🔥 สำคัญมาก
+            Thread.Sleep(400);
 
-            // เคลียร์โฟกัส control ภายใน
             SendKeys.SendWait("{ESC}");
             Thread.Sleep(100);
 
-            // Ctrl + F4
             SendKeys.SendWait("^({F4})");
             Environment.Exit(0);
         }
